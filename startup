@@ -1,0 +1,57 @@
+#!/bin/sh
+#
+# fluxbox startup-script:
+#
+# Lines starting with a '#' are ignored.
+
+# add extra bin directory into the PATH
+export PATH=$HOME/.fluxbox/bin:$PATH
+
+picom -b --config ~/.config/picom/picom.conf
+
+# Change your keymap:
+xmodmap "/home/rodrigo/.Xmodmap"
+
+# basic application set
+#	xautolock -time 6 -locker "alock -b shade -c glyph -i frame" -secure &
+#	gpg-agent --sh --enable-ssh-support --daemon
+skippy-xd --start-daemon &
+
+# delayed ignition startup
+sh -c """
+#	sleep 1
+#	aero2 &
+#	anki &
+#	cbatticon -n -u 30 &
+#	keepassxc &
+#	orage &
+#	xfce4-clipman &
+#	pamac-tray &
+#	nm-applet &
+#	volumeicon &
+#	parcellite &
+#	tinymount &
+#	windy &
+#	wpa_gui -t -q -m 5 &
+#	xpad -h &
+	conky -d --config .config/conky/sidekick/sidekick.conkyrc
+#	syslog-notify -u -c 25
+""" &
+
+urxvtd -f -q -o
+dunst &
+
+# Applications you want to run with fluxbox.
+# MAKE SURE THAT APPS THAT KEEP RUNNING HAVE AN ''&'' AT THE END.
+#
+# unclutter -idle 2 &
+# wmnd &
+# wmsmixer -w &
+# idesk &
+
+# And last but not least we start fluxbox.
+# Because it is the last app you have to run it with ''exec'' before it.
+
+exec fluxbox
+# or if you want to keep a log:
+# exec fluxbox -log "/home/rodrigo/.fluxbox/log"
