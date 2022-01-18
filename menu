@@ -1,5 +1,6 @@
 [begin] (Nery)
 [encoding] {UTF-8}
+      [separator]
       [exec] (Urxvt) {urxvt}
       [exec] (Terminal) {exo-open --launch TerminalEmulator}
       [separator]
